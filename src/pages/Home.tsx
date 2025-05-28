@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { fetchFromAniList, trendingAnimeQuery } from '@/services/anilistApi';
 import { Anime } from '@/types/anime';
@@ -6,6 +5,7 @@ import AnimeGrid from '@/components/AnimeGrid';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '@/services/authService';
+import { Search, User, Settings } from 'lucide-react';
 
 const Home = () => {
   const [trendingAnime, setTrendingAnime] = useState<Anime[]>([]);

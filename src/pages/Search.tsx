@@ -97,6 +97,10 @@ const Search = () => {
     setSearchParams({});
   };
 
+  const handleApplyFilters = () => {
+    performSearch();
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="mb-8">
@@ -172,7 +176,7 @@ const Search = () => {
               </div>
 
               <div className="flex justify-between">
-                <Button onClick={performSearch} disabled={loading}>
+                <Button onClick={handleApplyFilters} disabled={loading}>
                   Apply Filters
                 </Button>
                 <Button variant="outline" onClick={clearFilters}>
