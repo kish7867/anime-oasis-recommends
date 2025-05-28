@@ -3,6 +3,8 @@
 
 A full-stack anime recommendation system built for a recruitment assignment. This application allows users to search for anime, manage preferences, and get personalized recommendations based on their favorite genres.
 
+🌐 Live Demo: https://anime-oasis-recommends.lovable.app/
+
 ## Features
 
 ### Core Functionality
