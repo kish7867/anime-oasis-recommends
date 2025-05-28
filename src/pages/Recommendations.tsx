@@ -7,14 +7,14 @@ import AnimeGrid from '@/components/AnimeGrid';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { authService } from '@/services/authService';
+import { useAuth } from '@/hooks/useAuth';
 import { RefreshCw } from 'lucide-react';
 
 const Recommendations = () => {
   const [recommendations, setRecommendations] = useState<Anime[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const user = authService.getCurrentUser();
+  const { user } = useAuth();
 
   useEffect(() => {
     if (!user) {

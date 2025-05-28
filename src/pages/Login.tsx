@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { authService } from '@/services/authService';
+import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
 const Login = () => {
@@ -12,17 +12,18 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      await authService.login(email, password);
+      await login(email, password);
       toast.success('Login successful!');
       navigate('/');
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Login failed');
+    } catch (error: any) {
+      toast.error(error.message || 'Login failed');
     } finally {
       setLoading(false);
     }

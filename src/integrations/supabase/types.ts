@@ -9,7 +9,128 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      anime_cache: {
+        Row: {
+          average_score: number | null
+          banner_image: string | null
+          cached_at: string | null
+          cover_image_large: string | null
+          cover_image_medium: string | null
+          description: string | null
+          episodes: number | null
+          format: string | null
+          genres: string[] | null
+          id: number
+          popularity: number | null
+          season: string | null
+          season_year: number | null
+          status: string | null
+          studios: string[] | null
+          title_english: string | null
+          title_native: string | null
+          title_romaji: string
+        }
+        Insert: {
+          average_score?: number | null
+          banner_image?: string | null
+          cached_at?: string | null
+          cover_image_large?: string | null
+          cover_image_medium?: string | null
+          description?: string | null
+          episodes?: number | null
+          format?: string | null
+          genres?: string[] | null
+          id: number
+          popularity?: number | null
+          season?: string | null
+          season_year?: number | null
+          status?: string | null
+          studios?: string[] | null
+          title_english?: string | null
+          title_native?: string | null
+          title_romaji: string
+        }
+        Update: {
+          average_score?: number | null
+          banner_image?: string | null
+          cached_at?: string | null
+          cover_image_large?: string | null
+          cover_image_medium?: string | null
+          description?: string | null
+          episodes?: number | null
+          format?: string | null
+          genres?: string[] | null
+          id?: number
+          popularity?: number | null
+          season?: string | null
+          season_year?: number | null
+          status?: string | null
+          studios?: string[] | null
+          title_english?: string | null
+          title_native?: string | null
+          title_romaji?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          id: string
+          updated_at: string | null
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
+          updated_at?: string | null
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          updated_at?: string | null
+          username?: string
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          created_at: string | null
+          favorite_anime: number[] | null
+          favorite_genres: string[] | null
+          id: string
+          updated_at: string | null
+          user_id: string
+          watched_anime: number[] | null
+        }
+        Insert: {
+          created_at?: string | null
+          favorite_anime?: number[] | null
+          favorite_genres?: string[] | null
+          id?: string
+          updated_at?: string | null
+          user_id: string
+          watched_anime?: number[] | null
+        }
+        Update: {
+          created_at?: string | null
+          favorite_anime?: number[] | null
+          favorite_genres?: string[] | null
+          id?: string
+          updated_at?: string | null
+          user_id?: string
+          watched_anime?: number[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { authService } from '@/services/authService';
+import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
 const Register = () => {
@@ -14,6 +14,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { register } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,12 +32,11 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await authService.register(username, email, password);
-      await authService.login(email, password);
+      await register(username, email, password);
       toast.success('Account created successfully!');
       navigate('/preferences');
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : 'Registration failed');
+    } catch (error: any) {
+      toast.error(error.message || 'Registration failed');
     } finally {
       setLoading(false);
     }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { authService } from '@/services/authService';
+import { useAuth } from '@/hooks/useAuth';
 import { toast } from 'sonner';
 
 const GENRES = [
@@ -18,7 +18,7 @@ const Preferences = () => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const user = authService.getCurrentUser();
+  const { user, updatePreferences } = useAuth();
 
   useEffect(() => {
     if (!user) {
@@ -46,13 +46,13 @@ const Preferences = () => {
     setLoading(true);
 
     try {
-      await authService.updateUserPreferences({
+      await updatePreferences({
         favoriteGenres: selectedGenres
       });
       toast.success('Preferences saved successfully!');
       navigate('/recommendations');
-    } catch (error) {
-      toast.error('Failed to save preferences');
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to save preferences');
     } finally {
       setLoading(false);
     }
