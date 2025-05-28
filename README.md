@@ -266,6 +266,4 @@ npm run build
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
 
-This project is created for recruitment purposes and is available for evaluation.
