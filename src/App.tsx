@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Search from "./pages/Search";
 import Preferences from "./pages/Preferences";
 import Recommendations from "./pages/Recommendations";
+import AnimeDetails from "./pages/AnimeDetails";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ const App = () => (
               <Route path="search" element={<Search />} />
               <Route path="preferences" element={<Preferences />} />
               <Route path="recommendations" element={<Recommendations />} />
+              <Route path="anime/:id" element={<AnimeDetails />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
