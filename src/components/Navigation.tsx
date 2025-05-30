@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Search, User, Settings } from 'lucide-react';
-import { authService } from '@/services/authService';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useAuth } from '@/hooks/useAuth';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,23 +14,12 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const Navigation = () => {
-  const [user, setUser] = useState(authService.getCurrentUser());
+  const { user, logout } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const checkUser = () => {
-      setUser(authService.getCurrentUser());
-    };
-    
-    // Check user status periodically
-    const interval = setInterval(checkUser, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   const handleLogout = async () => {
-    await authService.logout();
-    setUser(null);
+    await logout();
     navigate('/');
   };
 
